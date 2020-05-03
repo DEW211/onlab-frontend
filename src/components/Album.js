@@ -50,7 +50,7 @@ function Album(props) {
         <Container className={classes.cardGrid} maxWidth="xl">
           {/* End hero unit */}
           <Grid container spacing={4}>
-            {props.state.currentAlbum.Pictures.map((card) => (
+            {props.state.currentAlbum.pictures.map((card) => (
               <Grid item key={card.id} xs={12} sm={6} md={4}>
                 <Card className={classes.card}>
                   <CardMedia
