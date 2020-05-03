@@ -9,7 +9,6 @@ import Typography from '@material-ui/core/Typography';
 import { makeStyles } from '@material-ui/core/styles';
 import Container from '@material-ui/core/Container';
 import { connect } from 'react-redux';
-import { editAction } from '../actions/editAction';
 import { fetchAlbum } from '../actions/albumActions';
 
 const useStyles = makeStyles((theme) => ({
@@ -91,7 +90,6 @@ const mapStateToProps = (state) => {
 };
 
 const mapDispatchToProps = {
-	editAction,
 	fetchAlbum,
 };
 
