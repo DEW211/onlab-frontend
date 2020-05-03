@@ -10,6 +10,7 @@ import { makeStyles } from '@material-ui/core/styles';
 import Container from '@material-ui/core/Container';
 import { connect } from 'react-redux';
 import { editAction } from '../actions/editAction';
+import { fetchAlbum } from '../actions/albumActions';
 
 const useStyles = makeStyles((theme) => ({
 	heroContent: {
@@ -36,8 +37,6 @@ const useStyles = makeStyles((theme) => ({
 	},
 }));
 
-
-
 function Albums(props) {
 	const classes = useStyles();
 
@@ -63,7 +62,15 @@ function Albums(props) {
 										</Typography>
 									</CardContent>
 									<CardActions>
-										<Button size="small" color="primary" onClick={props.editAction}>
+										<Button
+											size="small"
+											color="primary"
+											onClick={() => {
+												props.dispatch(
+													fetchAlbum(props.state.userName, card.name)
+												)
+											}}
+										>
 											View & Edit
 										</Button>
 									</CardActions>
@@ -85,6 +92,7 @@ const mapStateToProps = (state) => {
 
 const mapDispatchToProps = {
 	editAction,
+	fetchAlbum,
 };
 
-export default connect(mapStateToProps, mapDispatchToProps)(Albums);
+export default connect(mapStateToProps, null)(Albums);
