@@ -7,7 +7,7 @@ import Grid from '@material-ui/core/Grid';
 import { makeStyles } from '@material-ui/core/styles';
 import Container from '@material-ui/core/Container';
 import {connect} from 'react-redux';
-import { DELETE_PICTURE } from '../actions/ActionTypes';
+import{deletePictureAction} from '../actions/deletePictureAction'
 
 
 
@@ -50,8 +50,8 @@ function Album(props) {
         <Container className={classes.cardGrid} maxWidth="xl">
           {/* End hero unit */}
           <Grid container spacing={4}>
-            {props.state.currentAlbum.pictures.map((card) => (
-              <Grid item key={card.id} xs={12} sm={6} md={4}>
+            {props.state.currentAlbum.pictures.map((card, i) => (
+              <Grid item key={i} xs={12} sm={6} md={4}>
                 <Card className={classes.card}>
                   <CardMedia
                     className={classes.cardMedia}
@@ -59,10 +59,9 @@ function Album(props) {
                     title="Image title"
                   />
                   <CardActions>
-                    <Button size="small" color="primary" onClick={() => props.dispatch({type: DELETE_PICTURE, id: card.id})}>
+                    <Button size="small" color="primary" onClick={() => props.dispatch(deletePictureAction(card.id, props.state.userName, props.state.currentAlbum.name))}>
                      DELETE
                     </Button>
-                    
                   </CardActions>
                 </Card>
               </Grid>
