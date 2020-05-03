@@ -7,6 +7,10 @@ import AccountCircle from '@material-ui/icons/AccountCircle'
 import AddIcon from '@material-ui/icons/Add';
 import Typography from '@material-ui/core/Typography'
 import { makeStyles } from '@material-ui/core/styles';
+import {connect} from 'react-redux';
+import ArrowBackIcon from '@material-ui/icons/ArrowBack';
+import {fetchAlbums} from '../actions/albumsActions'
+
 
 const useStyles = makeStyles((theme) => ({
     icon:{
@@ -18,19 +22,19 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 
-function Header(){
+function Header(props){
     const classes = useStyles();
     return (
     <AppBar position="relative">
         <Toolbar>
-          <CameraIcon className={classes.icon} />
+          {(props.isEditing)? <IconButton color="inherit"><ArrowBackIcon className={classes.icon}/></IconButton>: <CameraIcon className={classes.icon} />}
           <Typography variant="h6" color="inherit" className={classes.title} noWrap>
-            My Albums
+    {(props.isEditing) ? props.albumTitle : "My Albums"}
           </Typography>
-          <IconButton
+          <IconButton onClick={() => {props.dispatch(fetchAlbums("DEW211"))}}
             color="inherit"
             >
-                <AddIcon/>
+                <AddIcon />
             </IconButton>
             <IconButton
             color="inherit"
@@ -42,4 +46,12 @@ function Header(){
     );
 }
 
-export default Header;
+const mapStateToProps = (state) => {
+	return {
+        isEditing: state.isEditing,
+        albumTitle: state.currentAlbum.AlbumName
+	};
+};
+
+export default connect(mapStateToProps, null)(Header);
+
