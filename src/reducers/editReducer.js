@@ -7,6 +7,7 @@ import {
 	FETCH_ALBUM_REQUEST,
 	FETCH_ALBUM_FAILURE,
 	FETCH_ALBUM_SUCCESS,
+	BACK_TO_ALBUMS_VIEW,
 } from '../actions/ActionTypes';
 
 export const initialState = {
@@ -87,6 +88,8 @@ export function editReducer(state = initialState, action) {
 			return Object.assign({}, state, { currentAlbum: action.data, isFetching: false, isEditing: true });
 		case FETCH_ALBUM_FAILURE:
 			return Object.assign({}, state, { error: action.error, isFetching: false });
+			case BACK_TO_ALBUMS_VIEW:
+				return Object.assign({}, state, {isEditing: false})
 		default:
 			return state;
 	}
