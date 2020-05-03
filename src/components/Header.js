@@ -49,7 +49,7 @@ function Header(props){
 const mapStateToProps = (state) => {
 	return {
         isEditing: state.isEditing,
-        albumTitle: state.currentAlbum.AlbumName
+        albumTitle: state.currentAlbum.name
 	};
 };
 
