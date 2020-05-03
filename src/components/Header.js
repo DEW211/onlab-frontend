@@ -10,7 +10,7 @@ import { makeStyles } from '@material-ui/core/styles';
 import {connect} from 'react-redux';
 import ArrowBackIcon from '@material-ui/icons/ArrowBack';
 import {fetchAlbums} from '../actions/albumsActions'
-
+import {backToAlbumsAction} from '../actions/backToAlbumsAction';
 
 const useStyles = makeStyles((theme) => ({
     icon:{
@@ -27,7 +27,7 @@ function Header(props){
     return (
     <AppBar position="relative">
         <Toolbar>
-          {(props.isEditing)? <IconButton color="inherit"><ArrowBackIcon className={classes.icon}/></IconButton>: <CameraIcon className={classes.icon} />}
+          {(props.isEditing)? <IconButton onClick={() => props.dispatch(backToAlbumsAction())} color="inherit"><ArrowBackIcon className={classes.icon}/></IconButton>: <CameraIcon className={classes.icon} />}
           <Typography variant="h6" color="inherit" className={classes.title} noWrap>
     {(props.isEditing) ? props.albumTitle : "My Albums"}
           </Typography>
@@ -36,7 +36,7 @@ function Header(props){
             >
                 <AddIcon />
             </IconButton>
-            <IconButton
+            <IconButton 
             color="inherit"
             >
                 <AccountCircle/>
